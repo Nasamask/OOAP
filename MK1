@@ -10,25 +10,28 @@ class Baggage:
 class Passenger:
     def __init__(self, name):
         self.name = name
-        self.baggage = None
-
-    def add_baggage(self, baggage):
-        self.baggage = baggage
 
     def __str__(self):
-        return f"Passenger: {self.name}, Baggage: {self.baggage}"
+        return f"Passenger: {self.name}"
 
 
 class BaggageControl:
     def __init__(self):
-        self.passengers = []
+        self.passenger_baggage = {}
 
     def add_passenger(self, passenger):
-        self.passengers.append(passenger)
+        self.passenger_baggage[passenger] = None
+
+    def assign_baggage(self, passenger, baggage):
+        if passenger in self.passenger_baggage:
+            self.passenger_baggage[passenger] = baggage
+        else:
+            print(f"Passenger {passenger.name} not found.")
 
     def show_baggage_info(self):
-        for passenger in self.passengers:
-            print(passenger)
+        for passenger, baggage in self.passenger_baggage.items():
+            baggage_info = str(baggage) if baggage else "No baggage"
+            print(f"{passenger} -> {baggage_info}")
 
 
 # Example usage
@@ -36,17 +39,20 @@ if __name__ == "__main__":
     # Create baggage control
     baggage_control = BaggageControl()
 
-    # Add passengers and their baggage
+    # Create passengers
     passenger1 = Passenger("Ivan Petrenko")
-    baggage1 = Baggage("Clothes, books", 20)
-    passenger1.add_baggage(baggage1)
-
     passenger2 = Passenger("Maria Ivanenko")
-    baggage2 = Baggage("Laptop, cosmetics", 10)
-    passenger2.add_baggage(baggage2)
 
+    # Add passengers to baggage control
     baggage_control.add_passenger(passenger1)
     baggage_control.add_passenger(passenger2)
+
+    # Assign baggage to passengers
+    baggage1 = Baggage("Clothes, books", 20)
+    baggage2 = Baggage("Laptop, cosmetics", 10)
+    
+    baggage_control.assign_baggage(passenger1, baggage1)
+    baggage_control.assign_baggage(passenger2, baggage2)
 
     # Display baggage information
     baggage_control.show_baggage_info()
