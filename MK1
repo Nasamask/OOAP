@@ -1,0 +1,52 @@
+class Baggage:
+    def __init__(self, contents, weight):
+        self.contents = contents
+        self.weight = weight
+
+    def __str__(self):
+        return f"Contents: {self.contents}, Weight: {self.weight} kg"
+
+
+class Passenger:
+    def __init__(self, name):
+        self.name = name
+        self.baggage = None
+
+    def add_baggage(self, baggage):
+        self.baggage = baggage
+
+    def __str__(self):
+        return f"Passenger: {self.name}, Baggage: {self.baggage}"
+
+
+class BaggageControl:
+    def __init__(self):
+        self.passengers = []
+
+    def add_passenger(self, passenger):
+        self.passengers.append(passenger)
+
+    def show_baggage_info(self):
+        for passenger in self.passengers:
+            print(passenger)
+
+
+# Example usage
+if __name__ == "__main__":
+    # Create baggage control
+    baggage_control = BaggageControl()
+
+    # Add passengers and their baggage
+    passenger1 = Passenger("Ivan Petrenko")
+    baggage1 = Baggage("Clothes, books", 20)
+    passenger1.add_baggage(baggage1)
+
+    passenger2 = Passenger("Maria Ivanenko")
+    baggage2 = Baggage("Laptop, cosmetics", 10)
+    passenger2.add_baggage(baggage2)
+
+    baggage_control.add_passenger(passenger1)
+    baggage_control.add_passenger(passenger2)
+
+    # Display baggage information
+    baggage_control.show_baggage_info()
