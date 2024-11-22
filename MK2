@@ -1,1 +1,29 @@
+class Phone:
+    def make_call(self):
+        pass
+
+class BasicPhone(Phone):
+    def make_call(self):
+        print("Звичайний виклик зроблено")
+
+class VideoCamera:
+    def make_video_call(self):
+        print("Відео виклик зроблено")
+
+class VideoCameraAdapter(Phone):
+    def __init__(self, video_camera):
+        self.video_camera = video_camera
+    
+    def make_call(self):
+        self.video_camera.make_video_call()
+
+
+if __name__ == "__main__":
+    phone = BasicPhone()
+    phone.make_call()  
+
+    
+    video_camera = VideoCamera()
+    video_adapter = VideoCameraAdapter(video_camera)
+    video_adapter.make_call()  
 
